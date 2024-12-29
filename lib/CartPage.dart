@@ -56,14 +56,52 @@ class CartPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 8),
-            ElevatedButton(
-              onPressed: cart.isEmpty ? null : onClearCart,
-              child: Text('Clear Cart'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: cart.isEmpty ? null : onClearCart,
+                  child: Text('Clear Cart'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: cart.isEmpty
+                      ? null
+                      : () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => OrderConfirmationPage(),
+                            ),
+                          );
+                        },
+                  child: Text('Checkout'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                  ),
+                ),
+              ],
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class OrderConfirmationPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Order Confirmation'),
+      ),
+      body: Center(
+        child: Text(
+          'Thank you for your purchase!',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ),
     );
